@@ -1,0 +1,10 @@
+{
+  "dialect_delimiter": "|",
+  "dialect_quotechar": "",
+  "dialect_escapechar": "",
+  "median_time": 20.3,
+  "iqr": 2.32,
+  "n_warmup": 2,
+  "n_measured": 5,
+  "n_rows": 25000
+}

@@ -1,0 +1,30 @@
+{
+  "repo": "alan-turing-institute/CleverCSV",
+  "baseline_sha": "ae043c948fd03eea2ae726525c4f347646d22316",
+  "candidate_description": "Replaced pure-Python per-cell regex bank in ConsistencyDetector.compute_type_score with a C++ pybind11 extension (bulk_type_score) that classifies cell types using a hand-written character-class state machine, eliminating ~3.97M Python regex.fullmatch() calls per detect() invocation.",
+  "baseline_time_s": {
+    "median": 21.68,
+    "iqr": 0.605,
+    "n_warmup": 2,
+    "n_measured": 5
+  },
+  "candidate_time_s": {
+    "median": 14.154,
+    "iqr": 0.184,
+    "n_warmup": 2,
+    "n_measured": 5
+  },
+  "speedup": 1.532,
+  "correctness": {
+    "existing_tests_pass": true,
+    "output_equivalent": true,
+    "tolerance": "1e-9 absolute",
+    "tolerance_justification": "Both implementations compute known/total as an integer ratio. No floating-point reordering occurs. Tolerance of 1e-9 accounts for any integer boundary rounding. 1 test skipped (test_encoding_cchardet) due to optional cchardet dependency absent in standard Colab environment \u2014 verified same skip occurs on unpatched baseline."
+  },
+  "environment": {
+    "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+    "ram_gb": 13.6,
+    "python_version": "3.12.13",
+    "colab_runtime": "CPU (Standard)"
+  }
+}
