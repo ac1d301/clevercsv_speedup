@@ -50,3 +50,21 @@ the speedup on real FEC data.
 - outputs/baseline_output.{json,pkl}, baseline_test_results.json — golden refs
 
 ## Build command (Colab)
+g++ -O3 -march=native -shared -fPIC -std=c++17 
+$(python -m pybind11 --includes) 
+src/type_detector.cpp -o type_detector$(python -c "import sysconfig; print(sysconfig.get_config_var('EXT_SUFFIX'))")
+
+## Test command
+cd /content/CleverCSV && python -m pytest tests/ -v
+
+## How we measure
+- 2 warmup runs (discarded)
+- 5 measured runs
+- Report median + IQR
+- Compute speedup = baseline_median / candidate_median = 20.30 / candidate_median
+
+## Definition of done for v2
+- candidate_colab.ipynb runs end-to-end on fresh Colab CPU and reports speedup ≥4x
+- C++ score matches Python score within 1e-9 on the FEC workload
+- All 164 CleverCSV tests still pass with the patched consistency.py
+- src/type_detector.cpp compiles clean with no warnings (besides multichar)
